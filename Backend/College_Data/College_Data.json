@@ -1,0 +1,192 @@
+{
+  "metadata": {
+      "title": "SSIT Admission FAQ",
+      "institution": "Shree Swaminarayan Institute of Technology (SSIT), Bhat",
+      "contact": {
+          "phone": [
+              "+91-9408260607",
+              "+91-7043609281"
+          ],
+          "email": "info@ssit.co.in",
+          "website": "www.ssit.ac.in",
+          "address": "Near Bhat circle, near to Agora Mall and SP Ring Road"
+      },
+      "help_desk": "Mon–Sat (10 AM – 5 PM)"
+  },
+  "sections": [
+      {
+          "title": "🎓 General Admission Questions",
+          "questions": [
+              {
+                  "q": "What courses are offered at SSIT, Bhat?",
+                  "a": [
+                      "Computer Engineering",
+                      "Computer Science & Engineering",
+                      "Information Technology",
+                      "Mechanical Engineering",
+                      "Civil Engineering"
+                  ]
+              },
+              {
+                  "q": "What is the eligibility for admission to B.E. programs?",
+                  "a": "Students must have passed 12th Science (Group A or A+B) with Physics, Chemistry, and Mathematics. Admission is through ACPC (Admission Committee for Professional Courses), Gujarat."
+              },
+              {
+                  "q": "Is there a management quota?",
+                  "a": "Yes, limited seats are available under the management quota as per GTU and AICTE norms. Visit the admission office for details."
+              }
+          ]
+      },
+      {
+          "title": "📅 Admission Process",
+          "questions": [
+              {
+                  "q": "How can I apply for admission?",
+                  "a": [
+                      "ACPC (Online registration at gujacpc.admissions.nic.in)",
+                      "Management Quota – Visit SSIT campus for guidance and form filling"
+                  ]
+              },
+              {
+                  "q": "What documents are required at the time of admission?",
+                  "a": [
+                      "10th and 12th Marksheet",
+                      "School Leaving Certificate (LC)",
+                      "GUJCET Score Card",
+                      "ACPC Registration Slip",
+                      "Aadhar Card student and father",
+                      "Passport Size Photos (5 copies)",
+                      "Caste Certificate (If applicable)"
+                  ]
+              }
+          ]
+      },
+      {
+          "title": "💰 Fees & Scholarships",
+          "questions": [
+              {
+                  "q": "What is the fee structure?",
+                  "a": "Approx. fees for B.E. programs is 67200/- per year."
+              },
+              {
+                  "q": "Are there any scholarships available?",
+                  "a": [
+                      "Government Scholarships (for SC/ST/OBC/EWS)",
+                      "Mukhyamantri Yuva Swavalamban Yojana (MYSY)"
+                  ]
+              }
+          ]
+      },
+      {
+          "title": "🏫 Campus & Facilities",
+          "questions": [
+              {
+                  "q": "Does SSIT provide hostel facilities?",
+                  "a": "Yes, separate hostels for boys."
+              },
+              {
+                  "q": "What other facilities are available on campus?",
+                  "a": [
+                      "Well-equipped labs",
+                      "Digital classrooms",
+                      "Library with 10,000+ books",
+                      "Canteen",
+                      "Bus facility",
+                      "Sports ground"
+                  ]
+              }
+          ]
+      },
+      {
+          "title": "📍 Visitor Information",
+          "questions": [
+              {
+                  "q": "Where is the campus located?",
+                  "a": "SSIT is located near Bhat circle, near to Agora Mall and SP Ring Road."
+              },
+              {
+                  "q": "Whom should I contact for admission queries?",
+                  "a": [
+                      "Phone: +91-9408260607, +91-7043609281",
+                      "Email: info@ssit.co.in",
+                      "Website: www.ssit.ac.in",
+                      "On-campus Admission Help Desk available Mon–Sat (10 AM – 5 PM)"
+                  ]
+              }
+          ]
+      },
+      {
+          "title": "Why Choose SSIT, Bhat?",
+          "points": [
+              "Reputed Institute under Shree Swaminarayan Group, known for discipline, value-based education & academic excellence.",
+              "Affiliated to Gujarat Technological University (GTU) and approved by AICTE.",
+              "Experienced Faculty with industry and academic expertise.",
+              "State-of-the-Art Infrastructure – Modern labs, digital classrooms, and updated curriculum.",
+              "Holistic Development – Technical knowledge combined with moral and spiritual values.",
+              "Training & Placement Cell – Regular campus drives, soft skills training, and career support.",
+              "Peaceful Campus surrounded by greenery with spiritual ambiance near Swaminarayan Dham.",
+              "Transport & Hostel Facility – College buses, girls/boys hostel with all modern amenities.",
+              "Student-Centered Approach – Personal mentoring, seminars, industrial visits, and technical events."
+          ]
+      },
+      {
+          "title": "❓ GTU vs. Private University – Which is Better?",
+          "comparison": {
+              "GTU (Gujarat Technological University)": {
+                  "Type": "Government-affiliated university",
+                  "Affiliation": "Colleges are affiliated to GTU",
+                  "Degree": "Awarded by GTU",
+                  "Curriculum": "Standardized across all affiliated colleges",
+                  "Fees": "Comparatively lower",
+                  "Recognition": "Widely recognized and accepted",
+                  "Control & Regulations": "Strictly monitored by state govt. & AICTE"
+              },
+              "Private University": {
+                  "Type": "Privately managed institution",
+                  "Affiliation": "University runs its own programs",
+                  "Degree": "Awarded by the Private University",
+                  "Curriculum": "Designed by the university itself",
+                  "Fees": "Usually higher",
+                  "Recognition": "Recognized, but depends on university reputation",
+                  "Control & Regulations": "Independent governance, but must follow UGC norms"
+              }
+          },
+          "conclusion": "GTU-affiliated colleges like SSIT offer government-approved structure, lower and regulated fees, strong academic discipline, consistent evaluation system, and wider industry recognition."
+      },
+      {
+          "title": "Computer Engg. vs IT Engg. vs CSE",
+          "comparison": [
+              {
+                  "Branch": "Computer Engineering (CE)",
+                  "Focus": "Hardware + Software",
+                  "Key Subjects": "Microprocessors, OS, Networks",
+                  "Career Paths": "Embedded Systems, System Admin, Cybersecurity, Web Dev"
+              },
+              {
+                  "Branch": "Information Technology (IT)",
+                  "Focus": "Software & Systems",
+                  "Key Subjects": "Web, DBMS, Cloud, Security",
+                  "Career Paths": "Web Dev, DB Admin, IT Support"
+              },
+              {
+                  "Branch": "Computer Science & Engineering (CSE)",
+                  "Focus": "Deep CS & Theory",
+                  "Key Subjects": "AI, ML, Data Science, Algorithms",
+                  "Career Paths": "Software Dev, Data Scientist, AI/ML Engineer, Web Dev"
+              }
+          ],
+          "note": "All three have overlapping subjects and strong career options. Choose based on interest in theory (CSE), systems (IT), or hardware + software (CE)."
+      },
+      {
+          "title": "🎭 Extra-Curricular Activities at SSIT",
+          "activities": [
+              "Annual Tech Fest – Project competitions, coding battles, and innovation showcases",
+              "Sports Week – Cricket, volleyball, chess, and more",
+              "Cultural Events – Garba nights, talent shows, music & drama performances",
+              "Social Activities – Blood donation camps, tree plantation drives, Swachh Bharat campaigns",
+              "Spiritual Programs – Value-based sessions, yoga, and meditation workshops",
+              "Clubs & Committees – Robotics Club, Coding Club, GDSC, AWS, NSS, Women Empowerment Cell, etc."
+          ]
+      }
+  ]
+}

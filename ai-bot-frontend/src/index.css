@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@layer components {
+  .chat-bubble-user {
+    @apply bg-blue-100 p-3 rounded-lg rounded-br-none mb-2 max-w-[80%] self-end;
+  }
+  
+  .chat-bubble-ai {
+    @apply bg-gray-100 p-3 rounded-lg rounded-bl-none mb-2 max-w-[80%] self-start;
+  }
+  
+  .sidebar-chat-item {
+    @apply p-3 hover:bg-gray-100 cursor-pointer border-b border-gray-200;
+  }
+  
+  .input-field {
+    @apply w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md;
+  }
+  
+  .btn-primary {
+    @apply px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors shadow-md;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors shadow-md;
+  }
+
+  .btn-upload {
+    @apply p-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors shadow-md border border-indigo-400 cursor-pointer flex-shrink-0;
+  }
+
+  .btn-send {
+    @apply p-2 bg-orange-600 text-white rounded-lg shadow-md border border-orange-400 hover:bg-orange-700 transition-colors flex-shrink-0;
+  }
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Voice activity animation */
+@keyframes voicePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.voice-active-pulse {
+  animation: voicePulse 1.5s infinite;
+  border-color: rgb(34, 197, 94);
+}
+
+/* Add any global styles below */
+
+/* Add responsive iframe styling */
+iframe {
+  border: none;
+  background: transparent;
+}
+
+/* Add responsive styling for the avatar container */
+@media (max-width: 768px) {
+  .avatar-container {
+    height: 50vh;
+  }
+}

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Avatar</title>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #avatar {
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    #status {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.8rem;
+      background: rgba(255, 255, 255, 0.72);
+      color: #111827;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      text-align: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(4px);
+      z-index: 2;
+    }
+
+    #status.hidden {
+      display: none;
+    }
+
+    #status .title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    #status .subtitle {
+      font-size: 0.95rem;
+      color: #4b5563;
+      max-width: 32rem;
+      line-height: 1.5;
+    }
+
+    #enable-audio {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.75rem 1rem;
+      background: #111827;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js/+esm",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/",
+        "talkinghead": "/libs/talkinghead.mjs"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import { TalkingHead } from "talkinghead";
+
+    let head = null;
+    let isSpeaking = false;
+
+    const statusEl = () => document.getElementById("status");
+    const setStatus = (title, subtitle, hidden = false) => {
+      const el = statusEl();
+      if (!el) return;
+      el.classList.toggle("hidden", hidden);
+      if (hidden) return;
+      el.querySelector(".title").textContent = title;
+      el.querySelector(".subtitle").textContent = subtitle;
+    };
+
+    const browserSpeak = (text) => new Promise((resolve) => {
+      if (!("speechSynthesis" in window) || !text) {
+        resolve(false);
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-GB";
+      utterance.rate = 1;
+      utterance.pitch = 1;
+      utterance.onend = () => resolve(true);
+      utterance.onerror = () => resolve(false);
+      window.speechSynthesis.speak(utterance);
+    });
+
+    const primeAudio = async () => {
+      try {
+        await browserSpeak("Audio enabled.");
+        setStatus("", "", true);
+      } catch (error) {
+        console.warn("Could not prime audio:", error);
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const avatarContainer = document.getElementById("avatar");
+      const enableAudioButton = document.getElementById("enable-audio");
+
+      try {
+        setStatus("Loading avatar...", "Please wait while the 3D model initializes.");
+
+        head = new TalkingHead(avatarContainer, {
+          cameraView: "upper",
+          lipsyncModules: ["en"],
+          ttsEndpoint: "https://texttospeech.googleapis.com/v1/text:synthesize",
+          ttsApikey: "",
+          backgroundColor: "transparent"
+        });
+
+        await head.showAvatar({
+          url: "/models/brunette%20(1).glb",
+          body: "F",
+          avatarMood: "neutral",
+          ttsLang: "en-GB",
+          ttsVoice: "en-GB-Standard-A",
+          lipsyncLang: "en"
+        });
+        
+        // Log morph target names to check if visemes are present
+        if (head.morphs) {
+          console.log("=== Morph Target Names ===");
+          head.morphs.forEach((morph, index) => {
+            if (morph.morphTargetDictionary) {
+              console.log(`Morph ${index}:`, Object.keys(morph.morphTargetDictionary));
+            }
+          });
+        }
+        
+        // Log viseme names expected by TalkingHead
+        console.log("=== Expected Viseme Names ===", head.visemeNames);
+
+        setStatus("Tap Enable Audio", "If the browser blocks speech, click the button below once and then ask your question.");
+
+        console.log("3D Avatar Loaded");
+
+        document.addEventListener("tts-end", () => {
+          isSpeaking = false;
+        });
+
+        window.addEventListener("resize", () => {
+          if (head && typeof head.resize === "function") {
+            head.resize();
+          }
+        });
+
+        window.parent.postMessage({ type: "AVATAR_READY" }, "*");
+        window.addEventListener("message", handleParentMessage);
+
+        enableAudioButton.addEventListener("click", primeAudio);
+      } catch (error) {
+        console.error("Error loading avatar:", error);
+        setStatus(
+          "Avatar unavailable",
+          "The 3D model failed to load. Check the browser console, then refresh the page or replace the model file."
+        );
+        window.parent.postMessage({ type: "AVATAR_ERROR", error: error.message }, "*");
+      }
+    });
+
+    let currentUtterance = null;
+    async function handleParentMessage(event) {
+      if (!event.data || !event.data.type) return;
+
+      const { type, text } = event.data;
+
+      if (type === "SPEAK" && text && head) {
+        try {
+          // Cancel previous speech and stop avatar
+          console.log("Canceling previous speech and avatar");
+          window.speechSynthesis.cancel();
+          if (currentUtterance) {
+            currentUtterance = null;
+          }
+          if (head) {
+            head.stopSpeaking();
+          }
+          
+          isSpeaking = true;
+          
+          console.log("Starting new avatar speech with lip-sync for:", text);
+          
+          // Speak the text
+          head.speakText(text, {
+            lipsyncLang: "en"
+          });
+          
+          // Play audio with browser speech synthesis
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = "en-GB";
+          utterance.rate = 1;
+          utterance.pitch = 1;
+          
+          utterance.onstart = () => {
+            console.log("Browser speech started");
+          };
+          
+          utterance.onend = () => {
+            console.log("Browser speech ended, stopping avatar");
+            if (head) {
+              head.stopSpeaking();
+            }
+            currentUtterance = null;
+          };
+          
+          currentUtterance = utterance;
+          window.speechSynthesis.speak(utterance);
+          
+        } catch (error) {
+          console.error("Error making avatar speak:", error);
+          window.parent.postMessage({ type: "SPEAK_ERROR", error: error.message }, "*");
+        } finally {
+          isSpeaking = false;
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div id="status">
+    <div class="title">Loading avatar...</div>
+    <div class="subtitle">Please wait while the 3D model initializes.</div>
+    <button id="enable-audio" type="button">Enable Audio</button>
+  </div>
+  <div id="avatar"></div>
+</body>
+</html>
